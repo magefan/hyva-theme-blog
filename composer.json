@@ -1,0 +1,17 @@
+{
+    "name": "magefan/hyva-theme-blog",
+    "description": "Hyva Theme Magefan Blog",
+    "type": "magento2-module",
+    "require": {
+        "hyva-themes/magento2-compat-module-fallback": "*",
+        "magefan/module-blog": "*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Hyva\\MagefanBlog\\": ""
+        }
+    }
+}

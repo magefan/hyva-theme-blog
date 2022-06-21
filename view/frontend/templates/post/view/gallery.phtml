@@ -1,0 +1,67 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+?>
+<?php
+/**
+ * Blog post media gallery images template
+ *
+ * @var $block \Magefan\Blog\Block\Post\View\Gallery
+ */
+?>
+
+<?php
+    $post = $block->getPost();
+    $galleryImages = $post->getGalleryImages();
+?>
+
+<?php if (count($galleryImages)) { ?>
+    <div class="post-gallery clearfix grid mb-5 my-4" style="grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); grid-gap:1rem;">
+        <?php foreach ($galleryImages as $image) { ?>
+            <a class="gallery-image-hld inline-block float-left"
+               style="margin: 0 14px 14px 0; border: 1px solid #ccc;"
+               data-fancybox="gallery"
+               href="<?= $block->escapeUrl($image) ?>"
+               rel="nofollow">
+                <img class="gallery-image p-0 m-0 block" src="<?= $block->escapeUrl($image->resize(200, 133)) ?>" alt="" />
+            </a>
+        <?php } ?>
+    </div>
+
+    <script>
+        var _deepestScroll = 0;
+
+        function initFancyBox(firstCheck) {
+            if (!firstCheck && _deepestScroll + 50 > document.documentElement.scrollTop) {
+                return;
+            }
+
+            _deepestScroll = document.documentElement.scrollTop;
+
+            let fancyGallery = document.querySelector('.post-view .post-gallery');
+            let offset = 150;
+            let isFancyGalleryVisible = ((fancyGallery.getBoundingClientRect().top - offset) < window.innerHeight);
+
+            if (isFancyGalleryVisible) {
+                document.removeEventListener('scroll', initFancyBox);
+
+                const link = document.createElement('link')
+                link.rel = 'stylesheet';
+                link.type = 'text/css';
+                link.href = 'https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css';
+                document.head.append(link);
+
+                const script = document.createElement('script')
+                script.src = 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js';
+                document.head.append(script);
+            }
+        }
+
+        initFancyBox(true);
+        document.addEventListener('scroll', initFancyBox);
+    </script>
+
+<?php } ?>
+

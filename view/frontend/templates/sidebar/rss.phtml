@@ -1,0 +1,28 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+?>
+<?php
+/**
+ * Blog sidebar archive template
+ *
+ * @var $block \Magefan\Blog\Block\Sidebar\Rss
+ */
+?>
+<div class="widget block block-rss mt-5"" data-bind="scope: 'blog-rss'">
+    <div class="title text-md md:text-lg font-semibold py-2">
+        <img width="17" height="17" class="rss-icon float-left pr-2.5 grayscale " style="width: 28px"
+             src="<?= $block->escapeUrl($block->getViewFileUrl('Magefan_Blog::images/rss-icon.png')) ?>"
+             alt="<?= $block->escapeHtml(__('RSS Feed')) ?>" >
+        <strong>
+            <a target="_blank"
+               class="hover:underline"
+               href="<?= $block->escapeUrl($block->getUrl('blog/rss/feed')) ?>">
+                <?= $block->escapeHtml(__('RSS Feed')) ?>
+            </a>
+        </strong>
+    </div>
+</div>
+

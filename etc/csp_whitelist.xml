@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+-->
+<csp_whitelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Csp:etc/csp_whitelist.xsd">
+    <policies>
+        <policy id="script-src">
+            <values>
+                <value id="addthis" type="host">*.addthis.com</value>
+                <value id="moatads" type="host">https://z.moatads.com</value>
+                <value id="addthisedge" type="host">https://v1.addthisedge.com</value>
+                <value id="jsdelivr" type="host">https://cdn.jsdelivr.net</value>
+            </values>
+        </policy>
+        <policy id="frame-src">
+            <values>
+                <value id="addthis" type="host">*.addthis.com</value>
+            </values>
+        </policy>
+        <policy id="style-src">
+            <values>
+                <value id="jsdelivr" type="host">https://cdn.jsdelivr.net</value>
+            </values>
+        </policy>
+    </policies>
+</csp_whitelist>

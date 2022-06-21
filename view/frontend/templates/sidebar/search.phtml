@@ -1,0 +1,30 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+?>
+<?php
+/**
+ * Blog sidebar search form template
+ *
+ * @var $block \Magefan\Blog\Block\Sidebar\Search
+ */
+?>
+
+<div class="blog-search">
+    <form class="form blog-search" id="blog_search_mini_form"
+          action="<?= $block->escapeUrl($block->getFormUrl()) ?>"
+          method="get">
+        <input id="blog_search"
+            type="text"
+            name="q"
+            value="<?= $block->escapeHtml($block->getQuery()) ?>"
+            placeholder="<?= $block->escapeHtml(__('Search posts here...')) ?>"
+            class="w-full field"
+            maxlength="128" role="combobox"
+            aria-haspopup="false"
+            aria-autocomplete="both"
+            autocomplete="off">
+    </form>
+</div>

@@ -1,0 +1,46 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+?>
+<?php
+/**
+ * Blog post list lazyload template
+ *
+ * @var $block \Magefan\Blog\Block\Post\PostList\Toolbar\Pager
+ */
+?>
+<?php if ($block->useLazyload()) { ?>
+    <?php
+        $config = $block->getLazyloadConfig([
+            'trigger_element' => '.mbblog-lazyload-trigger'
+        ]);
+    ?>
+    <div class="mfblog-autoloader">
+        <button class="mbblog-lazyload-trigger mfblog-hide-onload w-auto btn btn-primary justify-center text-sm mx-auto my-0"
+                title="<?= $block->escapeHtml(__('See more')) ?>"
+                type="button">
+            <span><?= $block->escapeHtml(__('See more')) ?></span>
+        </button>
+        <img class="posts-loader mfblog-show-onload mx-auto my-0" style="display: none;"
+             src="<?= $block->escapeUrl($block->getViewFileUrl('images/loader-2.gif')) ?>"
+             alt="<?= $block->escapeHtml(__('Posts loader')) ?>" />
+    </div>
+
+    <script>
+        (function () {
+            function initMfPostLazyLoad() {
+                const script = document.createElement('script')
+                script.src = '<?= $escaper->escapeUrl($block->getViewFileUrl($block->getLazyloadJs() . '.js')) ?>';
+                script.addEventListener('load', () => window.mfPostLazyLoad(<?= /*@noEscape*/ $config ?>));
+                document.head.append(script);
+            }
+
+            document.body.addEventListener('touchstart', initMfPostLazyLoad, {once: true});
+            document.body.addEventListener('mouseover', initMfPostLazyLoad, {once: true});
+        })();
+    </script>
+
+<?php }
+?>

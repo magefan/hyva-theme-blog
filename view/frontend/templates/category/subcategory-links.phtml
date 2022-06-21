@@ -1,0 +1,32 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+?>
+<?php
+/**
+ * Blog subcategory links template
+ *
+ * @var $block \Magefan\Blog\Block\Category\SubCategoryLinks
+ */
+?>
+
+<?php
+$subCategoriesCollection = $block->getSubCategories();
+?>
+<?php if ($subCategoriesCollection->count()) { ?>
+    <div class="subcategory-links-wrapper card mt-4">
+        <ul class="subcategory-links">
+            <?php foreach ($subCategoriesCollection as $category) { ?>
+                <li>
+                    <?php $categoryTitle = $block->escapeHtml($category->getTitle()) ?>
+                    <a href="<?= $block->escapeUrl($category->getCategoryUrl()) ?>" class="hover:underline"
+                       title="<?= /*@noEscape*/ $categoryTitle ?>">
+                        <?= /*@noEscape*/ $categoryTitle ?>
+                    </a>
+                </li>
+            <?php } ?>
+        </ul>
+    </div>
+<?php } ?>

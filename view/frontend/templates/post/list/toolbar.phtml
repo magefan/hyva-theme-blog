@@ -1,0 +1,18 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+?>
+<?php
+/**
+ * Blog post list toolbar template
+ *
+ * @var $block \Magefan\Blog\Block\Post\PostList\Toolbar
+ */
+?>
+<?php if ($block->getCollection()->getSize()) { ?>
+    <div class="toolbar toolbar-blog-posts">
+        <?= /*@noEscape*/ $block->getPagerHtml() ?>
+    </div>
+<?php } ?>

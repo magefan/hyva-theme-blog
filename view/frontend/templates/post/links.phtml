@@ -1,0 +1,40 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+?>
+<?php
+/**
+ * Blog post links template
+ *
+ * @var $block \Magefan\Blog\Block\Post\PostLinks
+ */
+?>
+<?php
+    $postCollection = $block->getPostCollection();
+?>
+<?php if (!$postCollection->count()) { ?>
+    <div class="message info empty">
+        <div>
+            <?= $block->escapeHtml(__('We can\'t find posts matching the selection.')) ?>
+        </div>
+    </div>
+<?php } else { ?>
+    <?= $block->getAdditionalHtml() ?>
+    <div class="post-links-wrapper card mt-4"">
+        <?php $iterator = 1; ?>
+        <ul class="post-links">
+            <?php foreach ($postCollection as $post): ?>
+                <li>
+                    <?php $postTitle = $post->getTitle() ?>
+                    <a href="<?= $block->escapeUrl($post->getPostUrl()) ?>" class="hover:underline"
+                       title="<?= $block->escapeHtml($postTitle) ?>">
+                        <?= $block->escapeHtml($postTitle) ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php } ?>
+

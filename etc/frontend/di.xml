@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<type name="Hyva\Theme\Service\Navigation">
+		<plugin name="Hyva_MagefanBlog_Plugin_Frontend_Hyva_Theme_Service_Navigation" type="Hyva\MagefanBlog\Plugin\Frontend\Hyva\Theme\Service\Navigation" sortOrder="10" disabled="false"/>
+	</type>
+
+	<type name="Hyva\CompatModuleFallback\Model\CompatModuleRegistry">
+		<arguments>
+			<argument name="compatModules" xsi:type="array">
+				<item name="orig_module_map" xsi:type="array">
+					<item name="original_module" xsi:type="string">Magefan_Blog</item>
+					<item name="compat_module" xsi:type="string">Hyva_MagefanBlog</item>
+				</item>
+			</argument>
+		</arguments>
+	</type>
+</config>

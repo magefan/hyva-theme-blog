@@ -1,0 +1,80 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+?>
+<?php
+/**
+ * Blog sidebar posts list template
+ *
+ * @var $block \Magefan\Blog\Block\Post\PostList\AbstractList
+ */
+?>
+
+<?php
+    $_postCollection = $block->getPostCollection();
+    $width = (int)$block->getBlockImageWidth() ?: 300;
+    $height = (int)$block->getBlockImageheight() ?: 200;
+    $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
+?>
+<?php if ($_postCollection->count()) { ?>
+<div class="block-<?= $escaper->escapeHtml(str_replace('_', '-', $block->getWidgetKey())) ?> block-list-posts mt-5" >
+    <div class="title text-md md:text-lg font-semibold py-2">
+        <?= $escaper->escapeHtml(__($block->getBlockTitle() ?: 'Recent Posts')) ?>
+    </div>
+    <div class="block-content card">
+        <?php foreach ($_postCollection as $_post) {
+                $_postUrl = $escaper->escapeUrl($_post->getPostUrl());
+                $_postName = $escaper->escapeHtml($_post->getTitle());
+            ?>
+            <div class="item pt-2 clearfix">
+                <?php if ($block->getDisplayImage()) { ?>
+                    <?php
+                    $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage();
+                    $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
+                    $featuredImgAlt = $featuredImgAlt ?: $_postName;
+                    ?>
+                    <div class="post-image">
+                        <a class="post-item-link" title="<?= $_postName ?>" href="<?= $_postUrl ?>">
+                            <?php
+                                $featuredImageUrl = $featuredImage
+                                    ? $imageHelper->init($_post->getFeaturedListImg() ?: $_post->getFeaturedImg())->resize($width, $height)
+                                    : $this->getViewFileUrl('Magefan_Blog::images/default-no-image.png');
+                            ?>
+                            <img data-width-amp="<?= $width ?>" data-height-amp="<?= $height ?>" layout="responsive" src="<?= $escaper->escapeUrl($featuredImageUrl) ?>"
+                                 alt="<?= $escaper->escapeHtml($featuredImgAlt) ?>" />
+                        </a>
+                    </div>
+                <?php } ?>
+
+                <a class="post-item-link" title="<?= $_postName ?>" href="<?= $_postUrl ?>"><?= $_postName ?></a>
+
+                <?php if ($block->getDisplayImage() && $_post->isPublishDateEnabled()) { ?>
+                    <div class="post-item-date">
+                        <span class="value"><?= $escaper->escapeHtml($_post->getPublishDate()) ?></span>
+                    </div>
+                <?php } ?>
+            </div>
+        <?php } ?>
+    </div>
+</div>
+
+<style>
+    .block-list-posts .post-image {
+        width: 60px;
+        float: left;
+        border-radius: 0;
+        padding: 2px;
+        background-color: #fff;
+        border: 1px solid #e9e9e9;
+        margin-right: 12px;
+    }
+
+    .clearfix:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+</style>
+<?php } ?>

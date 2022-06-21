@@ -1,1 +1,3 @@
-# magefan-hyva-theme-blog
+# Hyva Blog
+
+

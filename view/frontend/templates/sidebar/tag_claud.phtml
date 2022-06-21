@@ -1,0 +1,33 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+?>
+<?php
+/**
+ * Blog tag claud sidebar template
+ *
+ * @var $block \Magefan\Blog\Block\Sidebar\TagClaud
+ */
+?>
+<?php $tags = $block->getTags(); ?>
+
+<?php if (count($tags)) { ?>
+<div class="block-tagclaud mt-5">
+    <div class="title text-md md:text-lg font-semibold py-2">
+        <strong><?= $escaper->escapeHtml(__('Tags')) ?></strong>
+    </div>
+
+    <div class="tagclaud-hld card">
+    <?php foreach ($tags as $tag) { ?>
+        <?php $title = $tag->getTitle() ?>
+        <span class="<?= $escaper->escapeHtml($block->getTagClass($tag)) ?>">
+            <a href="<?= $escaper->escapeUrl($tag->getTagUrl()) ?>" title="<?= $escaper->escapeHtml($title) ?>">
+                <?= $escaper->escapeHtml($title) ?>
+            </a>
+        </span>
+    <?php } ?>
+    </div>
+</div>
+<?php } ?>

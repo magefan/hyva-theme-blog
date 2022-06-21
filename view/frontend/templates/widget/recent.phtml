@@ -1,0 +1,106 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+?>
+<?php
+/**
+ * Blog recent posts widget
+ *
+ * @var $block \Magefan\Blog\Block\Widget\Recent
+ */
+?>
+
+<?php
+    $_postCollection = $block->getPostCollection();
+    $firstItem = false;
+?>
+<?php if ($_postCollection->count()) { ?>
+<div class="post-list-wrapper blog-widget-recent card mt-5">
+    <h3 class="title text-md md:text-lg font-semibold pl-5 "><?= $block->escapeHtml($block->getTitle()) ?></h3>
+    <ul class="post-list clearfix">
+        <?php foreach ($_postCollection as $_post) { ?>
+            <?php
+                $_postUrl = $block->escapeUrl($_post->getPostUrl());
+                $_postName = $block->escapeHtml($_post->getTitle());
+            ?>
+            <li class="post-holder post-holder-<?= (int)$_post->getId() ?> pt-5" <?= $firstItem ? 'style="border-top: 1px solid #ccc;"' : '' ?> >
+                <div class="post-header">
+                    <div class="post-title-holder clearfix">
+                        <div class="post-title">
+                            <a class="post-item-link xt-md font-semibold"
+                               href="<?= /*@noEscape*/ $_postUrl ?>">
+                                <?= /*@noEscape*/ $_postName ?>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="post-info clear pt-2 text-xs">
+                        <?php if ($_post->isPublishDateEnabled()) { ?>
+                            <div class="item post-posed-date inline-block">
+                                <span class="blog-post-meta-date inline-flex text-gray-700 mr-2 gap-x-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 flex-shrink-0" width="25" height="25">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <?= $block->escapeHtml($_post->getPublishDate()) ?>
+                                </span>
+                            </div>
+                        <?php } ?>
+                        <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
+                        <div class="item post-categories inline-block">
+                            <span class="blog-post-meta-cats inline-flex text-gray-700 mr-2 gap-x-1">
+                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4" width="25" height="25">
+                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
+                               </svg>
+                                <?php $n = 0;
+                                foreach ($_post->getParentCategories() as $ct) { $n++; ?>
+                                    <a title="<?= $block->escapeHtml($ct->getTitle()) ?>"
+                                       href="<?= $block->escapeUrl($ct->getCategoryUrl()) ?>">
+                                        <?= $block->escapeHtml($ct->getTitle()) ?>
+                                    </a>
+                                    <?php if ($n != $_categoriesCount) { ?>, <?php } ?>
+                                <?php } ?>
+                            </span>
+                        </div>
+                        <?php } ?>
+                    </div>
+                </div>
+
+                <div class="post-content">
+                    <div class="post-description clearfix leading-5 text-xs">
+                        <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
+                        <?php if ($featuredImage) { ?>
+                            <?php
+                                $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
+                            if (!$featuredImgAlt) {
+                                $featuredImgAlt = $_postName;
+                            }
+                            ?>
+                            <div class="post-ftimg-hld">
+                                <a href="<?= /*@noEscape*/ $_postUrl ?>" title="<?= /*@noEscape*/ $_postName ?>">
+                                    <img src="<?= $block->escapeHtml($featuredImage) ?>"
+                                         alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
+                                </a>
+                            </div>
+                        <?php } ?>
+                        <div class="post-text-hld clearfix">
+                            <?= /*@noEscape*/ $block->getShorContent($_post) ?>
+                        </div>
+                        <a class="post-read-more pt-2.5 float-right hover:underline"
+                           href="<?= /*@noEscape*/ $_postUrl ?>"
+                           title="<?= /*@noEscape*/ $_postName ?>"
+                           >
+                           <?= $block->escapeHtml(__('Read more &#187;')) ?>
+                        </a>
+                    </div>
+                </div>
+                <div class="post-footer">
+
+                </div>
+            </li>
+        <?php $firstItem = true;?>
+        <?php } ?>
+    </ul>
+</div>
+<?php } ?>

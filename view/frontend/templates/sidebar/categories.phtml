@@ -1,0 +1,62 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+?>
+<?php
+/**
+ * Blog sidebar categories template
+ *
+ * @var $block \Magefan\Blog\Block\Sidebar\Categories
+ */
+?>
+
+<?php $items = $block->getGroupedChilds(); ?>
+
+<?php if (count($items)) { ?>
+<div class="block-categories">
+    <div class="title text-md md:text-lg font-semibold py-2">
+        <?= $block->escapeHtml(__('Categories')) ?>
+    </div>
+
+    <ul class="card">
+    <?php
+        $level = 0;
+        $first = true;
+    foreach ($items as $item) {
+        $newLevel = $item->getLevel();
+
+        if ($level == $newLevel && !$first) {
+            echo '</li>';
+        }
+
+        if ($level < $newLevel) {
+            echo '<ul>';
+        }
+
+        if ($level > $newLevel) {
+            for ($i = $level; $i > $newLevel; $i--) {
+                echo '</ul></li>';
+            }
+        }
+
+        ?>
+                    <li class="<?= ($newLevel > 0) ? 'pl-2' : 'pt-1' ?>" >
+                        <a href="<?= $block->escapeUrl($item->getCategoryUrl()) ?>">
+                    <?= $block->escapeHtml($item->getTitle()) ?>
+                        </a>
+                <?php if ($block->showPostsCount()) { ?>
+                        (<?= $block->escapeHtml($item->getPostsCount()) ?>)
+                        <?php } ?>
+            <?php
+            $level = $newLevel;
+            $first = false;
+    }
+    ?>
+    </ul>
+</div>
+<?php } ?>
+
+
+

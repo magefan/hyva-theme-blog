@@ -1,0 +1,23 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+
+/**
+ * @var \Magefan\Blog\Block\ViewsCount $block
+ */
+?>
+<script>
+    setTimeout(function() {
+        fetch('<?= $block->escapeUrl($block->getCounterUrl()) ?>',
+            {
+                Method: 'POST',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            });
+    }, 5000);
+</script>
+
+

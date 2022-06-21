@@ -1,0 +1,40 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+?>
+<?php
+/**
+ * Blog sidebar archive template
+ *
+ * @var $block \Magefan\Blog\Block\Sidebar\Archive
+ */
+?>
+
+<?php
+    $_months = $block->getMonths();
+?>
+<?php if (count($_months)) { ?>
+<div class="block-archive mt-5">
+    <div class="title text-md md:text-lg font-semibold py-2">
+        <?= $escaper->escapeHtml(__('Archive')) ?>
+    </div>
+    <div class="block-content card">
+        <?php foreach ($_months as $time) { ?>
+            <?php
+                $title = $block->getTranslatedDate($time);
+            ?>
+            <div class="item">
+                <a title="<?= $escaper->escapeHtml(__('Archive %1', $title)) ?>"
+                   class="archive-item-link"
+                   href="<?= $escaper->escapeUrl($block->getTimeUrl($time)) ?>">
+                    <?= $escaper->escapeHtml($title); ?>
+                </a>
+            </div>
+        <?php } ?>
+    </div>
+</div>
+<?php } ?>
+
+
