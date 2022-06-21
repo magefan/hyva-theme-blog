@@ -6,6 +6,7 @@
         "hyva-themes/magento2-compat-module-fallback": "*",
         "magefan/module-blog": "*"
     },
+    "version": "2.0.0",
     "autoload": {
         "files": [
             "registration.php"
