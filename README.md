@@ -9,7 +9,7 @@
 
 It is an integration module between Hyva Theme and [Magento 2 Blog](https://magefan.com/magento2-blog-extension) by Magefan.
 
-<a href="[https://magefan.com/magento2-blog-extension](https://github.com/magefan/hyva-theme-blog/archive/refs/heads/main.zip)"><img width="190" height="70" src="https://magefan.com/media/wysiwyg/download-now_1.png"></a>
+<a href="https://github.com/magefan/hyva-theme-blog/archive/refs/heads/main.zip"><img width="190" height="70" src="https://magefan.com/media/wysiwyg/download-now_1.png"></a>
 
 
 ## Requirements
