@@ -10,8 +10,6 @@
         <remove src="Magefan_Blog::css/blog-m.css" />
         <remove src="Magefan_Blog::css/blog-new.css" />
         <remove src="Magefan_Blog::css/blog-custom.css" />
+        <remove src="Magefan_Blog::css/comments.css" />
     </head>
-    <body>
-        <referenceContainer name="mfblog.lazyload.js" remove="true"/>
-    </body>
 </page>
