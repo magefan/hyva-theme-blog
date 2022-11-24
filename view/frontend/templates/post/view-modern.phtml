@@ -16,17 +16,29 @@
     $_postUrl = $_post->getPostUrl();
     $_postName = $block->escapeHtml($_post->getTitle(), null);
 ?>
-<?= $block->getStyleViewModel()->getStyle('Magefan_Blog::css/bootstrap-4.4.1-custom-min.css') ?>
-<div class="_post-view">
+
+<?php
+    /** @var Hyva\Theme\ViewModel\HeroiconsOutline $heroicons */
+    $heroicons = $viewModels->require(\Hyva\Theme\ViewModel\HeroiconsOutline::class);
+?>
+
+<style>
+    .post-content h2 {font-size: 1.6rem;line-height: 1.8rem;margin-top: 1em;margin-bottom: 0.8em;}
+    .post-content p {margin-bottom: 0.8em;}
+    .post-content ul {margin-bottom: 0.8em;}
+    .post-content ol {margin-bottom: 0.8em;}
+</style>
+
+<div class="_post-view modern">
     <div class="post-holder post-holder-<?= (int)$_post->getId() ?>">
 
         <div class="post-header clearfix">
 
             <!-- post category-->
             <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
-                <div class="post-category mb-4">
+                <div class="post-category flex flex-wrap gap-3 mb-4">
                         <?php foreach ($_post->getParentCategories() as $ct) { ?>
-                            <a class="category-name" href="<?= $block->escapeUrl($ct->getCategoryUrl()) ?>"
+                            <a class="category-name inline-block px-2.5 py-1.5 bg-gray-900 text-white leading-4 _hover:bg-gray-600" href="<?= $block->escapeUrl($ct->getCategoryUrl()) ?>"
                                title="<?= $block->escapeHtml($ct->getTitle()) ?>">
                                 <?= $block->escapeHtml($ct->getTitle()) ?>
                             </a>
@@ -41,7 +53,7 @@
                     <?php if ($_author = $_post->getAuthor()) { ?>
                         <span class="post-author-name">
                             <?php if ($block->authorPageEnabled()) { ?>
-                                <a title="<?= $block->escapeHtml($_author->getTitle()) ?>"
+                                <a class="hover:text-red font-semibold hover:underline" title="<?= $block->escapeHtml($_author->getTitle()) ?>"
                                    href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>"><?= $block->escapeHtml($_author->getTitle()) ?>
                                 </a>
                             <?php } else { ?>
@@ -60,8 +72,8 @@
                 <!-- post view -->
                 <?php if ($block->viewsCountEnabled()) { ?>
                     <?php if ($viewsCount = $_post->getViewsCount()) { ?>
-                        <span class="post-view float-right d-none d-md-block">
-                            <i class="mf-blog-icon mfbi-views"></i>
+                        <span class="post-view float-right hidden md:flex items-center gap-1">
+                            <?= $heroicons->eyeHtml('w-5 h-5') ?>
                             <?= $block->escapeHtml($viewsCount)?>
                         </span>
                     <?php } ?>
@@ -69,8 +81,8 @@
 
                 <!-- post comments -->
                 <?php if ($block->magefanCommentsEnabled() && $_post->getCommentsCount()) { ?>
-                    <span class="post-comments float-right d-none d-md-block">
-                        <i class="mf-blog-icon mfbi-comments"></i>
+                    <span class="post-comments float-right hidden md:flex items-center gap-1 mr-3">
+                        <?= $heroicons->annotationHtml('w-5 h-5') ?>
                         <a title="<?= $block->escapeHtml($_post->getTitle()) ?>"
                            href="<?= $block->escapeUrl($_post->getPostUrl()) ?>#post-comments"
                         ><?= $block->escapeHtml($_post->getCommentsCount()) ?></a>
@@ -95,7 +107,7 @@
                             $featuredImgAlt = $_postName;
                         }
                     ?>
-                    <div class="post-featured-image">
+                    <div class="post-featured-image mb-6">
                         <img src="<?= $block->escapeUrl($featuredImage) ?>"
                              alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
                     </div>
@@ -103,13 +115,13 @@
 
                 <!-- Post Tags -->
                 <?php if ($_tagsCount = $_post->getTagsCount()) { ?>
-                    <div class="post-tag">
-                        <div class="item post-tags">
-                            <div class="post-tag-title">Tags</div>
+                    <div class="post-tag mb-6">
+                        <div class="item post-tags flex flex-wrap gap-3">
+                            <span class="post-tag-title inline-block px-3 py-2 bg-gray-900 text-white leading-4">Tags</span>
                             <?php $n = 0; ?>
                             <?php foreach ($_post->getRelatedTags() as $tag) { ?>
                                 <?php $n++; ?>
-                                <a title="<?= $block->escapeHtml($tag->getTitle()) ?>"
+                                <a class="inline-block border px-3 py-2 leading-4 hover:bg-gray-900 hover:text-white duration-300" title="<?= $block->escapeHtml($tag->getTitle()) ?>"
                                    href="<?= $block->escapeUrl($tag->getTagUrl()) ?>"
                                 ><?= $block->escapeHtml($tag->getTitle()) ?></a>
                             <?php } ?>
@@ -126,7 +138,7 @@
         </div>
 
         <div class="post-bottom">
-            <div class="post-sharing-bottom">
+            <div class="post-sharing-bottom py-8 border-gray-300 border-t-2 text-center">
                 <!-- Go to www.addthis.com/dashboard to customize your tools -->
                 <div class="addthis_inline_share_toolbox" addthis:url="<?= $block->escapeUrl($_postUrl) ?>"></div>
             </div>

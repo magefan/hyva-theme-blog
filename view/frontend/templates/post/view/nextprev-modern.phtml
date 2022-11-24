@@ -18,27 +18,27 @@
         $nextPost = $block->getNextPost();
     ?>
     <?php if ($prevPost || $nextPost) { ?>
-        <div class="post-nextprev clearfix row-cols-2">
-            <div class="post-prev">
+        <div class="post-nextprev modern flex py-5 border-gray-300 border-2 border-r-0 border-l-0 mb-10">
+            <div class="post-prev w-1/2">
                 <?php if ($prevPost) { ?>
                     <?php $title = $prevPost->getTitle() ?>
-                    <a class="nextprev-link prev-link float-left hover:underline"
+                    <a class="nextprev-link prev-link text-left _hover:underline text-[#222]"
                        href="<?= $block->escapeUrl($prevPost->getPostUrl()) ?>"
                        title="<?= $block->escapeHtml(__('Read %1', $title)) ?>">
-                        <span class="text-left"><?= $block->escapeHtml(__('Previous')) ?></span>
-                        <?= $block->escapeHtml($title) ?>
+                        <span class="text-left block text-[#bbb] text-sm"><?= $block->escapeHtml(__('Previous')) ?></span>
+                        <span class="text-left block text-[#222] font-bold text-xl"><?= $block->escapeHtml($title) ?></span>
                     </a>
                 <?php } ?>
             </div>
 
-            <div class="post-next">
+            <div class="post-next w-1/2">
                 <?php if ($nextPost) { ?>
                     <?php $title = $nextPost->getTitle() ?>
-                    <a class="nextprev-link next-link float-right hover:underline"
+                    <a class="nextprev-link next-link text-right _hover:underline"
                        href="<?= $block->escapeUrl($nextPost->getPostUrl()) ?>"
                        title="<?= $block->escapeHtml(__('Read %1', $title)) ?>">
-                        <span class="text-right"><?= $block->escapeHtml(__('Next')) ?></span>
-                        <?= $block->escapeHtml($title) ?>
+                        <span class="text-right block text-[#bbb] text-sm"><?= $block->escapeHtml(__('Next')) ?></span>
+                        <span class="text-right block text-[#222] font-bold text-xl"><?= $block->escapeHtml($title) ?></span>
                     </a>
                 <?php } ?>
             </div>

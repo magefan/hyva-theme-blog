@@ -19,11 +19,11 @@
     $canPost = $block->canPost();
 ?>
 <div id="post-comments">
-    <div class="c-count">
-        <strong><?= $block->escapeHtml(__('%1 Comment(s)', $block->getPost()->getCommentsCount())) ?></strong>
+    <div class="c-count container flex flex-col items-center pt-6 pb-3 mx-auto mb-6 border-gray-300 border-b-2  md:flex-row">
+        <strong class="text-2xl font-medium text-gray-900 title-font"><?= $block->escapeHtml(__('%1 Comment(s)', $block->getPost()->getCommentsCount())) ?></strong>
     </div>
     <!-- reply form -->
-    <div class="c-reply cf">
+    <div class="c-reply cf mb-4">
         <?php if ($image = $block->getCustomerImage()) { ?>
         <div class="c-img">
             <img src="<?= $block->escapeUrl($image) ?>" alt="<?= $block->escapeHtml($block->getCustomerName()) ?>">
@@ -40,7 +40,7 @@
                           disabled="disabled"<?php } ?>
                           required
                           data-validate="{required:true}"></textarea>
-                <div class="c-btn-hld">
+                <div class="c-btn-hld hidden">
 
                     <?php if ($canPost && !$session->getCustomerGroupId()) { ?>
                     <div class="lr-hld">
@@ -94,7 +94,7 @@
 if ($commentsCount) {
     ?>
     <!-- comments list -->
-    <div class="c-comments" >
+    <div class="c-comments pt-7 pl-6 border-gray-300 border-t-2" >
     <?php $i = 0 ?>
     <?php foreach ($comments as $comment) { ?>
             <?php
@@ -104,12 +104,12 @@ if ($commentsCount) {
             <?= $block->getCommentHtml($comment) ?>
         <?php } ?>
         <?php if ($commentsCount > $numberOfCommentsToDisplay) { ?>
-            <a href="#" class="c-allcomments more-comments-action" data-comment="0"><?= $block->escapeHtml(__('Load more comments')) ?></a>
+            <a href="#" class="c-allcomments more-comments-action block w-full text-center text-white py-2.5 px-3 bg-[#1d4ed8] hover:bg-[#2563eb]" data-comment="0"><?= $block->escapeHtml(__('Load more comments')) ?></a>
         <?php } ?>
     </div>
 
     <!-- reply comment form -->
-    <div id="c-replyform-comment" class="c-replyform c-replyform-comment" style="display:none">
+    <div id="c-replyform-comment mb-4" class="c-replyform c-replyform-comment" style="display:none">
         <form class="reply-form-blog-recaptcha"
               action="<?= $block->escapeUrl($block->getFormUrl()) ?>"
               method="post">

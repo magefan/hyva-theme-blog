@@ -12,8 +12,13 @@
  */
 ?>
 
-<div class="blog-search">
-    <form class="form blog-search" id="blog_search_mini_form"
+<?php
+/** @var Hyva\Theme\ViewModel\HeroiconsOutline $heroicons */
+$heroicons = $viewModels->require(\Hyva\Theme\ViewModel\HeroiconsOutline::class);
+?>
+
+<div class="blog-search mb-10">
+    <form class="form blog-search relative" id="blog_search_mini_form"
           action="<?= $block->escapeUrl($block->getFormUrl()) ?>"
           method="get">
         <input id="blog_search"
@@ -21,10 +26,28 @@
             name="q"
             value="<?= $block->escapeHtml($block->getQuery()) ?>"
             placeholder="<?= $block->escapeHtml(__('Search posts here...')) ?>"
-            class="w-full field"
+            class="w-full field m-0 pr-10"
             maxlength="128" role="combobox"
             aria-haspopup="false"
             aria-autocomplete="both"
             autocomplete="off">
+            <?= $heroicons->searchHtml('w-5 h-5 absolute top-3 right-3') ?>
     </form>
 </div>
+
+<style>
+    .blog-search .action.search:before {
+        -webkit-font-smoothing: antialiased;
+        content: '';
+        margin: 0;
+        vertical-align: top;
+        display: inline-block;
+        overflow: hidden;
+        speak: none;
+        width: 16px;
+        height: 32px;
+        background: url(../../frontend/Magento/luma/en_US/Magefan_Blog/images/search-icon-white.svg) no-repeat -10px -7px;
+        background-size: 35px;
+        opacity: 1;
+    }
+</style>

@@ -16,20 +16,20 @@
     $_months = $block->getMonths();
 ?>
 <?php if (count($_months)) { ?>
-<div class="block-archive mt-5">
-    <div class="title text-md md:text-lg font-semibold py-2">
+<div class="block-archive mb-10">
+    <div class="title text-xl md:text-2xl font-semibold py-2">
         <?= $escaper->escapeHtml(__('Archive')) ?>
     </div>
-    <div class="block-content card">
+    <div class="block-content flex flex-wrap gap-1">
         <?php foreach ($_months as $time) { ?>
             <?php
                 $title = $block->getTranslatedDate($time);
             ?>
             <div class="item">
                 <a title="<?= $escaper->escapeHtml(__('Archive %1', $title)) ?>"
-                   class="archive-item-link"
+                   class="archive-item-link font-semibold hover:text-red duration-300"
                    href="<?= $escaper->escapeUrl($block->getTimeUrl($time)) ?>">
-                    <?= $escaper->escapeHtml($title); ?>
+                    <?= $escaper->escapeHtml($title); ?> \
                 </a>
             </div>
         <?php } ?>

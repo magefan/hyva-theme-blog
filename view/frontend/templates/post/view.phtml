@@ -16,6 +16,14 @@ $_post = $block->getPost();
 $_postUrl = $_post->getPostUrl();
 $_postName = $block->escapeHtml($_post->getTitle(), null);
 ?>
+
+<style>
+    .post-content h2 {font-size: 1.6rem;line-height: 1.8rem;margin-top: 1em;margin-bottom: 0.8em;}
+    .post-content p {margin-bottom: 0.8em;}
+    .post-content ul {margin-bottom: 0.8em;}
+    .post-content ol {margin-bottom: 0.8em;}
+</style>
+
 <div class="post-view card">
     <div class="post-holder post-holder-<?= (int)$_post->getId() ?>">
 
@@ -40,9 +48,8 @@ $_postName = $block->escapeHtml($_post->getTitle(), null);
                         $featuredImgAlt = $_postName;
                     }
                     ?>
-                    <div class="post-ftimg-hld">
-                        <img src="<?= $block->escapeUrl($featuredImage) ?>"
-                             alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
+                    <div class="post-ftimg-hld mb-5">
+                        <img src="<?= $block->escapeUrl($featuredImage) ?>" alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
                     </div>
                 <?php } ?>
                 <div class="post-text-hld">

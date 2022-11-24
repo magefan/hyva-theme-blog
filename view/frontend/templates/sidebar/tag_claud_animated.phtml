@@ -14,9 +14,9 @@
 <?php $tags = $block->getTags(); ?>
 
 <?php if (count($tags)) { ?>
-<div class="widget block block-tagclaud mt-5" data-bind="scope: 'tagclaud'">
-    <div class="title text-md md:text-lg font-semibold py-2">
-        <strong><?= $block->escapeHtml(__('Tags')) ?></strong>
+<div class="block-tagclaud mb-10" data-bind="scope: 'tagclaud'">
+    <div class="title text-xl md:text-2xl font-semibold py-2">
+        <?= $block->escapeHtml(__('Tags')) ?>
     </div>
 
     <div id="blogSidebarCloudCanvasContainer">

@@ -17,8 +17,8 @@
     $firstItem = false;
 ?>
 <?php if ($_postCollection->count()) { ?>
-<div class="post-list-wrapper blog-widget-recent card mt-5">
-    <h3 class="title text-md md:text-lg font-semibold pl-5 "><?= $block->escapeHtml($block->getTitle()) ?></h3>
+<div class="post-list-wrapper blog-widget-recent _card mb-10">
+    <h3 class="title text-xl md:text-2xl font-semibold py-2"><?= $block->escapeHtml($block->getTitle()) ?></h3>
     <ul class="post-list clearfix">
         <?php foreach ($_postCollection as $_post) { ?>
             <?php

@@ -15,21 +15,21 @@
     $comment = $block->getComment();
     $numberOfCommentsToDisplay = $block->getNumberOfReplies();
 ?>
-<div class="c-comment c-comment-parent-<?= (int)$comment->getParentId() ?>" <?= $comment->getIsHidden() ? 'style="display:none"' : '' ?>>
+<div class="c-comment c-comment-parent-<?= (int)$comment->getParentId() ?> border-b-2 border-dashed mb-5" <?= $comment->getIsHidden() ? 'style="display:none"' : '' ?>>
     <?php if ($authorImage = $comment->getAuthorImage()) { ?>
     <div class="c-img">
         <img src="<?= $block->escapeUrl($authorImage) ?>" alt="<?= $block->escapeHtml($comment->getAuthorName()) ?>">
     </div>
     <?php } ?>
     <div class="c-post c-post-<?= (int)$comment->getId() ?>" id="c-post-<?= (int)$comment->getId() ?>">
-        <div class="p-info">
-            <div class="p-name"><?= $block->escapeHtml($comment->getAuthor()->getNickname()) ?></div>
-            <div class="publish-date"><?php echo $block->escapeHtml($block->getPublishDate()) ?></div>
+        <div class="p-info mb-2.5">
+            <div class="p-name inline-block font-bold mr-2.5"><?= $block->escapeHtml($comment->getAuthor()->getNickname()) ?></div>
+            <div class="publish-date inline-block text-gray-300 text-xs"><?php echo $block->escapeHtml($block->getPublishDate()) ?></div>
         </div>
 
-        <div class="p-text"><?= /*@noEscape*/ nl2br($block->escapeHtml($comment->getText())) ?></div>
-        <div class="p-actions">
-            <a href="#" class="reply-action"
+        <div class="p-text mb-2.5"><?= /*@noEscape*/ nl2br($block->escapeHtml($comment->getText())) ?></div>
+        <div class="p-actions mb-2.5">
+            <a href="#" class="reply-action text-gray-300 text-xs"
                data-comment="<?= $comment->isReply() ?
                    (int)$comment->getParentId() :
                    (int)$comment->getId() ?>"
@@ -40,7 +40,7 @@
             $commentsCount = count($replies);
         if ($commentsCount) {
             ?>
-            <div class="p-replies">
+            <div class="p-replies pl-3 border-l-2 border-dashed">
             <?php $i = 0 ?>
             <?php foreach ($replies as $reply) { ?>
                     <?php

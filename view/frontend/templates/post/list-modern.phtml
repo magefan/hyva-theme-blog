@@ -34,19 +34,23 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
                     $_postUrl = $block->escapeUrl($_post->getPostUrl());
                     $_postName = $block->escapeHtml($_post->getTitle());
                 ?>
-                <li class="post-item post-holder post-holder-<?= (int)$_post->getId() ?> p-0 block mb-4" style="border-bottom: 1px solid #eee; border-radius: 0;">
+                <li class="post-item post-holder post-holder-<?= (int)$_post->getId() ?> block mb-4 pb-4 border-gray-300 border-b-2">
 
-                    <div class="post-container flex">
+                    <div class="post-container flex gap-6">
                         <!-- post image -->
                         <div class="post-image grow-0 shrink-0 basis-4/12 w-2/6 order-none">
                             <!-- img container -->
                             <div class="image-container relative">
-                                <a class="image-wrap block overflow-hidden relative" style="line-height:0; padding-bottom:70%;" href="<?= /*@noEscape*/ $_postUrl ?>" title="<?= /*@noEscape*/ $_postName ?>">
+                                <a class="image-wrap block overflow-hidden relative"
+                                   style="line-height:0;padding-bottom:70%;"
+                                   href="<?= /*@noEscape*/ $_postUrl ?>"
+                                   title="<?= /*@noEscape*/ $_postName ?>"
+                                >
                                     <?php $featuredImage = $_post->getFeaturedListImg() ?: $_post->getFeaturedImg(); ?>
                                     <?php
-                                    if (!$featuredImage) {
-                                        $featuredImage = $this->getViewFileUrl('Magefan_Blog::images/default-no-image.png');
-                                    }
+                                        if (!$featuredImage) {
+                                            $featuredImage = $this->getViewFileUrl('Magefan_Blog::images/default-no-image.png');
+                                        }
                                     ?>
                                     <?php if ($featuredImage) { ?>
                                         <?php
@@ -56,16 +60,16 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
                                             $featuredImgAlt = $_postName;
                                         }
                                         ?>
-                                        <div class="animation-type-zoom bg-img mfblogunveil absolute block w-full h-full bg-cover bg-center overflow-hidden" style="transition: transform .3s ease,opacity .3s; line-height: 0; " data-original="<?= $block->escapeHtml($featuredImage) ?>"></div>
+                                        <div class="animation-type-zoom bg-img mfblogunveil absolute block w-full h-full bg-cover bg-center overflow-hidden hover:scale-110 duration-300" data-original="<?= $block->escapeHtml($featuredImage) ?>"></div>
                                         <?php /* <img class="" src="<?= $block->escapeHtml($featuredImage) ?>" alt=""> */ ?>
                                     <?php } ?>
                                 </a>
 
                                 <!-- post category-->
                                 <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
-                                    <span class="post-category">
+                                    <span class="post-category block absolute left-0 bottom-0 leading-none hidden md:block">
                                         <?php foreach ($_post->getParentCategories() as $ct) { ?>
-                                            <a class="category-name" href="<?= $block->escapeUrl($ct->getCategoryUrl()) ?>"
+                                            <a class="category-name inline-block bg-black hover:bg-[#4db2ec] duration-300 text-white text-xs font-medium leading-none px-2 py-2 mr-1 mt-1" href="<?= $block->escapeUrl($ct->getCategoryUrl()) ?>"
                                                title="<?= $block->escapeHtml($ct->getTitle()) ?>">
                                                 <?= $block->escapeHtml($ct->getTitle()) ?>
                                             </a>
@@ -77,22 +81,22 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
                         </div>
 
                         <!-- block info -->
-                        <div class="post-info pl-6 grow-0 shrink-0 basis-2/3 max-w-[70%] w-[70%] order-1 box-border">
+                        <div class="post-info grow-0 shrink-0 basis-2/3 max-w-[70%] w-[70%] order-1 box-border">
                             <!-- post title -->
                             <div class="post-title-wrap mb-2">
                                 <h3 class="post-title">
-                                    <a href="<?= /*@noEscape*/ $_postUrl ?>"><?= /*@noEscape*/ $_postName ?></a>
+                                    <a class="inline-block text-lg md:text-xl font-medium font-sans hover:text-red duration-300" href="<?= /*@noEscape*/ $_postUrl ?>"><?= /*@noEscape*/ $_postName ?></a>
                                 </h3>
                             </div>
 
                             <!-- block data -->
-                            <div class="post-data-wrap mb-3">
+                            <div class="post-data-wrap text-xs mb-3">
                                 <!-- post author -->
                                 <?php if ($block->authorEnabled()) { ?>
                                     <?php if ($_author = $_post->getAuthor()) { ?>
                                         <span class="post-author-name">
                                             <?php if ($block->authorPageEnabled()) { ?>
-                                                <a title="<?= $block->escapeHtml($_author->getTitle()) ?>"
+                                                <a class="font-medium hover:text-red duration-300" title="<?= $block->escapeHtml($_author->getTitle()) ?>"
                                                    href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>"><?= $block->escapeHtml($_author->getTitle()) ?>
                                                 </a>
                                             <?php } else { ?>
@@ -105,13 +109,13 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
 
                                 <!-- post date -->
                                 <?php if ($_post->isPublishDateEnabled()) { ?>
-                                    <span class="post-date"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
+                                    <span class="post-date text-gray-400"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
                                 <?php } ?>
 
                                 <!-- post view -->
                                 <?php if ($block->viewsCountEnabled()) { ?>
                                     <?php if ($viewsCount = $_post->getViewsCount()) { ?>
-                                        <span class="post-view float-right d-none d-md-block">
+                                        <span class="post-view float-right hidden md:block">
                                             <?= $block->escapeHtml($viewsCount)?>
                                         </span>
                                     <?php } ?>
@@ -119,13 +123,13 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
                             </div>
 
                             <!-- post description -->
-                            <div class="post-description mb-4">
+                            <div class="post-description mb-4 hidden md:block">
                                 <?= /*@noEscape*/ $_post->getShortFilteredContent() ?>
                             </div>
 
                             <!-- read more -->
-                            <div class="post-read-more">
-                                <a class="post-read btn-white inline-block text-white py-2.5 px-4 text-[#7d7d7d] bg-white border border-gray-300"   href="<?= /*@noEscape*/ $_postUrl ?>" title="<?= /*@noEscape*/ $_postName ?>">
+                            <div class="post-read-more hidden md:block">
+                                <a class="post-read btn-white inline-block text-white py-2.5 px-4 text-[#7d7d7d] hover:text-white bg-white hover:bg-blue-400 border border-gray-300 duration-300"   href="<?= /*@noEscape*/ $_postUrl ?>" title="<?= /*@noEscape*/ $_postName ?>">
                                     <?= $block->escapeHtml(__('Read more')) ?>
                                 </a>
                             </div>
@@ -146,3 +150,29 @@ $imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
     <?= $block->getToolbarHtml() ?>
     <?= $block->getChildHtml('addthisJs'); ?>
 <?php endif; ?>
+
+<style>
+    .post-view {
+        display: block;
+        background: #000;
+        color: #fff;
+        font-size: 10px;
+        font-weight: 600;
+        text-align: center;
+        line-height: 11px;
+        position: relative;
+        top: -5px;
+        padding: 4px 6px;
+    }
+    .post-view:after {
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        content: '';
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 3px 3px 0 0;
+        border-color: #000 transparent transparent;
+    }
+</style>
