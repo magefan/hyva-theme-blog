@@ -20,7 +20,9 @@ $heroicons = $viewModels->require(\Hyva\Theme\ViewModel\HeroiconsOutline::class)
 <div class="blog-search mb-10">
     <form class="form blog-search relative" id="blog_search_mini_form"
           action="<?= $block->escapeUrl($block->getFormUrl()) ?>"
-          method="get">
+          method="get"
+          onsubmit="goBlogSearch(event);"
+          >
         <input id="blog_search"
             type="text"
             name="q"
@@ -34,7 +36,17 @@ $heroicons = $viewModels->require(\Hyva\Theme\ViewModel\HeroiconsOutline::class)
             <?= $heroicons->searchHtml('w-5 h-5 absolute top-3 right-3') ?>
     </form>
 </div>
-
+<script type="text/javascript">
+    function goBlogSearch(event)
+    {
+        var value = document.getElementById('blog_search').value;
+        if (value) {
+            var a = document.getElementById('blog_search_mini_form').action;
+            window.location = a + ( ('/' != a.charAt(a.length - 1)) ? '/' : '' ) + encodeURI(value) + '/';
+        }
+        event.preventDefault();
+    }
+</script>
 <style>
     .blog-search .action.search:before {
         -webkit-font-smoothing: antialiased;
