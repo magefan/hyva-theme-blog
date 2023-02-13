@@ -9,6 +9,7 @@
 	<module name="Hyva_MagefanBlog">
 		<sequence>
 			<module name="Hyva_Theme"/>
+			<module name="Magefan_Blog"/>
 		</sequence>
 	</module>
 </config>
