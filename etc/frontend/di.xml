@@ -13,7 +13,7 @@
 	<type name="Hyva\CompatModuleFallback\Model\CompatModuleRegistry">
 		<arguments>
 			<argument name="compatModules" xsi:type="array">
-				<item name="orig_module_map" xsi:type="array">
+				<item name="orig_module_map_blog" xsi:type="array">
 					<item name="original_module" xsi:type="string">Magefan_Blog</item>
 					<item name="compat_module" xsi:type="string">Hyva_MagefanBlog</item>
 				</item>
