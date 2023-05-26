@@ -109,7 +109,7 @@ if ($commentsCount) {
     </div>
 
     <!-- reply comment form -->
-    <div id="c-replyform-comment mb-4" class="c-replyform c-replyform-comment" style="display:none">
+    <div id="c-replyform-comment" class="c-replyform c-replyform-comment mb-4" style="display:none">
         <form class="reply-form-blog-recaptcha"
               action="<?= $block->escapeUrl($block->getFormUrl()) ?>"
               method="post">
@@ -183,7 +183,7 @@ if ($commentsCount) {
 
         _deepestScroll = document.documentElement.scrollTop;
 
-        let commentElement = document.querySelector('.post-view .comments');
+        let commentElement = document.querySelector('._post-view .comments');
         let offset = 50;
 
         let isCommentElementVisible = ((commentElement.getBoundingClientRect().top - offset) < window.innerHeight);
@@ -191,7 +191,8 @@ if ($commentsCount) {
         if (isCommentElementVisible) {
             document.removeEventListener('scroll', initCommentsJs);
 
-            const script = document.createElement('script')
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
             script.src = '<?= $escaper->escapeUrl($block->getViewFileUrl('Hyva_MagefanBlog/js/magefan-comments.js')) ?>';
             document.head.append(script);
         }
