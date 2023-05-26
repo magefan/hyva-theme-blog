@@ -38,15 +38,14 @@
         }, msgLifetime);
     };
 
-
     Array.prototype.forEach.call($hd.querySelectorAll('form'), function(el, i) {
         el.addEventListener('submit', function (event) {
             event.preventDefault();
             var $form = event.target;
 
-            Array.prototype.forEach.call($hd.querySelectorAll('form [type=submit]'), function(submitButton, i) {
-                submitButton.setAttribute('disabled', 'disabled');
-            });
+            if ($form.classList.contains('comment-form-blog-recaptcha')){
+                $form.querySelector('button[type=submit]').setAttribute('disabled', 'disabled');
+            }
 
             fetch($form.getAttribute('action'), {
                     method: 'POST',
@@ -112,13 +111,13 @@
     }
 
     $hd.querySelector('form textarea').addEventListener('click', function (event) {
-        if (event.target.closest('.no-active')) {
-            event.target.closest('.no-active').classList.remove('no-active');
+        let hidden = event.target.parentElement.querySelector('.hidden');
+        if (typeof (hidden) !== 'undefined' && hidden !== null){
+            event.target.parentElement.querySelector('.hidden').classList.remove('hidden')
         }
     });
 
-    var $rf = document.querySelector('#c-replyform-comment');
-
+    var $rf = document.getElementById('c-replyform-comment');
 
     Array.prototype.forEach.call(document.querySelectorAll('.reply-action'), function(el, i) {
         el.addEventListener('click', function (event) {
