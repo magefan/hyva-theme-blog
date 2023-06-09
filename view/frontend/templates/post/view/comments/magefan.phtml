@@ -109,7 +109,7 @@ if ($commentsCount) {
     </div>
 
     <!-- reply comment form -->
-    <div id="c-replyform-comment mb-4" class="c-replyform c-replyform-comment" style="display:none">
+    <div id="c-replyform-comment" class="c-replyform c-replyform-comment mb-4" style="display:none">
         <form class="reply-form-blog-recaptcha"
               action="<?= $block->escapeUrl($block->getFormUrl()) ?>"
               method="post">
@@ -152,7 +152,7 @@ if ($commentsCount) {
                 <?php } ?>
                 <button type="button" class="cancel reply-cancel-action" ><?= $block->escapeHtml(__('Cancel')) ?></button>
             <?php if ($canPost) { ?>
-                    <button type="submit"><?= $block->escapeHtml(__('Submit')) ?></button>
+                    <button class="read-more btn btn-default inline-block text-white text-sm font-medium leading-none py-2.5 px-3 bg-[#4db2ec] hover:bg-[#222] rounded-none" type="submit"><?= $block->escapeHtml(__('Submit')) ?></button>
                     <?php if ($block->displayPrivacyPolicyCheckbox()) { ?>
                         <?= $block->getChildBlock('display_privacy_policy_checkbox')->setCommentType('comment')->toHtml(); ?>
                     <?php } ?>
@@ -191,7 +191,8 @@ if ($commentsCount) {
         if (isCommentElementVisible) {
             document.removeEventListener('scroll', initCommentsJs);
 
-            const script = document.createElement('script')
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
             script.src = '<?= $escaper->escapeUrl($block->getViewFileUrl('Hyva_MagefanBlog/js/magefan-comments.js')) ?>';
             document.head.append(script);
         }
