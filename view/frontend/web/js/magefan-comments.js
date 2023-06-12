@@ -7,7 +7,6 @@
 
     var msgLifetime = 4000;
     var $hd = document.querySelector('#post-comments');
-
     var getMessageHtml = function (msg, type) {
         var h = document.createElement('div');
         h.classList.add('message-' + type, type, 'message');
@@ -44,31 +43,31 @@
             event.preventDefault();
             var $form = event.target;
 
-            Array.prototype.forEach.call($hd.querySelectorAll('form [type=submit]'), function(submitButton, i) {
-                submitButton.setAttribute('disabled', 'disabled');
-            });
+            if ($form.classList.contains('comment-form-blog-recaptcha')){
+                $form.querySelector('button[type=submit]').setAttribute('disabled', 'disabled');
+            }
 
             fetch($form.getAttribute('action'), {
-                    method: 'POST',
-                    body: new URLSearchParams(new FormData($form)).toString(),
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                }).then(function (response) {
-                    if (response.ok) {
-                        return response.json();
-                    }
-                    return Promise.reject(response);
-                    }).then(function (response) {
-                    if (response.success) {
-                        processSuccess($form, response.message);
-                    } else {
-                        processError($form, response.message);
-                    }
-                    }).catch(function (error) {
-                        console.warn(error);
-                    });
+                method: 'POST',
+                body: new URLSearchParams(new FormData($form)).toString(),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            }).then(function (response) {
+                if (response.ok) {
+                    return response.json();
+                }
+                return Promise.reject(response);
+            }).then(function (response) {
+                if (response.success) {
+                    processSuccess($form, response.message);
+                } else {
+                    processError($form, response.message);
+                }
+            }).catch(function (error) {
+                console.warn(error);
+            });
 
             return false;
         });
@@ -112,8 +111,8 @@
     }
 
     $hd.querySelector('form textarea').addEventListener('click', function (event) {
-        if (event.target.closest('.no-active')) {
-            event.target.closest('.no-active').classList.remove('no-active');
+        if (event.target.closest('form').querySelector('.c-btn-hld')) {
+            event.target.closest('form').querySelector('.c-btn-hld').classList.remove('hidden');
         }
     });
 
