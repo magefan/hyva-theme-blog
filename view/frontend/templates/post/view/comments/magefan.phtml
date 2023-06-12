@@ -34,34 +34,34 @@
                   action="<?= $block->escapeUrl($block->getFormUrl()) ?>"
                   method="post">
                 <?= $block->getBlockHtml('formkey') ?>
-                <input type="hidden" name="post_id" value="<?= (int)($block->getPost()->getId()) ?>" />
-                <textarea name="text" class="w-full"
+                <input class="form-input" type="hidden" name="post_id" value="<?= (int)($block->getPost()->getId()) ?>" />
+                <textarea name="text" class="w-full form-textarea"
                           placeholder="<?= $canPost ? $block->escapeHtml(__('Add a comment...')) : $block->escapeHtml(__('Sign in to add a comment...')) ?>" <?php if (!$canPost) {?>
                           disabled="disabled"<?php } ?>
                           required
                           data-validate="{required:true}"></textarea>
-                <div class="c-btn-hld hidden">
+                <div class="c-btn-hld hidden mt-5">
 
                     <?php if ($canPost && !$session->getCustomerGroupId()) { ?>
-                    <div class="lr-hld">
-                        <div class="left-hld">
+                    <div class="lr-hld flex justify-between">
+                        <div class="left-hld w-[49%]">
                             <input type="text"
                                    name="author_nickname"
                                    value=""
                                    placeholder="<?= $block->escapeHtml(__('Full Name')) ?>"
-                                   class="input-text required-entry w-full"
+                                   class="input-text required-entry w-full form-input"
                                    data-validate="{required:true}"
                                    autocomplete="off"
                                    required
                                    aria-required="true">
                         </div>
-                        <div class="right-hld">
+                        <div class="right-hld w-[49%]">
                             <input type="email"
                                    name="author_email"
                                    autocomplete="email"
                                    value=""
                                    placeholder="<?= $block->escapeHtml(__('Email')) ?>"
-                                   class="input-text w-full"
+                                   class="input-text w-full form-email"
                                    required
                                    data-validate="{required:true, 'validate-email':true}"
                                    aria-required="true">
@@ -77,7 +77,7 @@
                     <div id="recaptcha-append-to"><?= $block->getChildHtml('blog.post.comments.magefan.additional'); ?></div>
 
                     <?php if ($canPost) { ?>
-                        <button type="submit"><?= $block->escapeHtml(__('Submit')) ?></button>
+                        <button type="submit" class="btn btn-default inline-block text-white text-sm font-medium leading-none py-2.5 px-3 bg-[#4db2ec] hover:bg-[#222] rounded-none mt-5"><?= $block->escapeHtml(__('Submit')) ?></button>
                     <?php } else { ?>
                         <button type="button"
                                 onclick="window.location='<?= $block->escapeUrl($block->getCustomerUrl()->getLoginUrl()) ?>';">
@@ -116,43 +116,43 @@ if ($commentsCount) {
             <?= $block->getBlockHtml('formkey') ?>
             <input type="hidden" name="post_id" value="<?= $block->escapeHtml($block->getPost()->getId()) ?>" />
             <input type="hidden" name="parent_id" value="" />
-            <textarea class="refresh-value w-full"
+            <textarea class="refresh-value w-full form-textarea"
                       name="text"
                       placeholder="<?= $canPost ? $block->escapeHtml(__('Add a reply...')) : $block->escapeHtml(__('Sign in to add a comment...')) ?>" <?php if (!$canPost) {?>
                       disabled="disabled"<?php } ?>
                       required
                       data-validate="{required:true}"></textarea>
-            <div class="c-btn-hld">
+            <div class="c-btn-hld mt-5">
 
             <?php if ($canPost && !$session->getCustomerGroupId()) { ?>
-                <div class="lr-hld">
-                    <div class="left-hld">
+                <div class="lr-hld flex justify-between">
+                    <div class="left-hld w-[49%]">
                         <input type="text"
                                name="author_nickname"
                                value=""
                                placeholder="<?= $block->escapeHtml(__('Full Name')) ?>"
-                               class="input-text required-entry refresh-value w-full"
+                               class="input-text required-entry refresh-value w-full form-input"
                                data-validate="{required:true}"
                                required
                                autocomplete="off"
                                aria-required="true">
                     </div>
-                    <div class="right-hld">
+                    <div class="right-hld w-[49%]">
                         <input type="email"
                                name="author_email"
                                autocomplete="email"
                                value=""
                                placeholder="<?= $block->escapeHtml(__('Email')) ?>"
-                               class="input-text required-entry refresh-value w-full"
+                               class="input-text required-entry refresh-value w-full form-email"
                                data-validate="{required:true, 'validate-email':true}"
                                required
                                aria-required="true">
                     </div>
                 </div>
                 <?php } ?>
-                <button type="button" class="cancel reply-cancel-action" ><?= $block->escapeHtml(__('Cancel')) ?></button>
+                <button type="button" class="cancel reply-cancel-action mt-5 mr-4" ><?= $block->escapeHtml(__('Cancel')) ?></button>
             <?php if ($canPost) { ?>
-                    <button class="read-more btn btn-default inline-block text-white text-sm font-medium leading-none py-2.5 px-3 bg-[#4db2ec] hover:bg-[#222] rounded-none" type="submit"><?= $block->escapeHtml(__('Submit')) ?></button>
+                    <button class="read-more btn btn-default inline-block text-white text-sm font-medium leading-none py-2.5 px-3 bg-[#4db2ec] hover:bg-[#222] rounded-none mt-5" type="submit"><?= $block->escapeHtml(__('Submit')) ?></button>
                     <?php if ($block->displayPrivacyPolicyCheckbox()) { ?>
                         <?= $block->getChildBlock('display_privacy_policy_checkbox')->setCommentType('comment')->toHtml(); ?>
                     <?php } ?>
