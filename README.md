@@ -13,7 +13,7 @@ If you use Magento 2 Blog Plus, then use [magefan/hyva-theme-blog-plus](https://
 
 If you use Magento 2 Blog Extra, then use [magefan/hyva-theme-blog-extra](https://github.com/magefan/hyva-theme-blog-extra)
 
-<a href="https://github.com/magefan/hyva-theme-blog/archive/refs/heads/main.zip"><img width="190" height="70" src="https://magefan.com/media/wysiwyg/download-now_1.png"></a>
+<a href="https://github.com/magefan/hyva-theme-blog/archive/refs/heads/main.zip"><img width="190" height="70" src="https://cm.magefan.com/wysiwyg/products/download-magefan-extensions.png"></a>
 
 
 ## Requirements
