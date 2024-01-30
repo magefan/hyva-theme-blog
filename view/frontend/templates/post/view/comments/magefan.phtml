@@ -74,7 +74,7 @@
                     <?php } ?>
                     <div class="clearfix"></div>
 
-                    <div id="recaptcha-append-to"><?= $block->getChildHtml('blog.post.comments.magefan.additional'); ?></div>
+                    <?= $block->getChildHtml('blog_comments_recaptcha_checkbox_form_element') ?>
 
                     <?php if ($canPost) { ?>
                         <button type="submit" class="btn btn-default inline-block text-white text-sm font-medium leading-none py-2.5 px-3 bg-[#4db2ec] hover:bg-[#222] rounded-none mt-5"><?= $block->escapeHtml(__('Submit')) ?></button>
@@ -166,7 +166,7 @@ if ($commentsCount) {
                     </button>
                 <?php } ?>
                 <div class="clearfix"></div>
-                <div id="recaptcha-reply-append-to"><?= $block->getChildHtml('blog.post.comments.magefan.reply.additional'); ?></div>
+                <?= $block->getChildHtml('blog_comments_recaptcha_checkbox_reply_form_element') ?>
             </div>
         </form>
     </div>
