@@ -56,11 +56,11 @@
                         that.opt.current_page++;
                     }
 
-                    /*if ($html.find('[data-original]').length) {
-                        require(['jquery', 'Magefan_Blog/js/lib/mfblogunveil', 'domReady!'], function($){
-                            $('.mfblogunveil').mfblogunveil();
-                        });
-                    }*/
+                    if (window.LazyLoad) {
+                        var lazyLoadConfig = {"elements_selector":"img,div","data_srcset":"originalset"};
+                        new LazyLoad(lazyLoadConfig)
+                    }
+
 
                     if (window.addthis) {
                         addthis.toolbox('.addthis_toolbox');
