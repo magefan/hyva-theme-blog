@@ -18,8 +18,9 @@
     <?php if ($_post->isPublishDateEnabled()) { ?>
         <div class="item post-posed-date inline-block">
             <span class="blog-post-meta-date inline-flex text-gray-700 mr-2 gap-x-1">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 flex-shrink-0" width="25" height="25">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="w-5 h-5 flex-shrink-0" viewBox="0 0 20 16">
+                <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857z"/>
+                <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
                 </svg>
                 <?= $block->escapeHtml($_post->getPublishDate()) ?>
             </span>
@@ -90,6 +91,26 @@
                 <?php if ($authorPageEnabled) { ?>
                 </a>
                 <?php } ?>
+
+                <?php
+                    $coAuthors = $_post->getRelatedCoauthors();
+                    $coAuthorsCount = count($coAuthors);
+                ?>
+                <?php if ($coAuthorsCount) { ?>
+                    <?= $block->escapeHtml(__('and')) ?>
+                    <?php $z = 0 ?>
+                    <?php foreach($coAuthors as $coAuthor) { ?>
+                        <?php $z++; ?>
+                        <?php if ($block->authorPageEnabled()) { ?>
+                            <a title="<?= $block->escapeHtml($coAuthor->getTitle()) ?>"
+                               href="<?= $block->escapeUrl($coAuthor->getAuthorUrl()) ?>"><?= $block->escapeHtml($coAuthor->getTitle()) ?></a><?php if ($z != $coAuthorsCount) echo ', ' ?>
+                        <?php } else { ?>
+                            <?= $block->escapeHtml($coAuthor->getTitle()) ?><?php if ($z != $coAuthorsCount) echo ', ' ?>
+                        <?php } ?>
+                    <?php } ?>
+                <?php } ?>
+
+
             </span>
         </div>
         <?php } ?>
@@ -108,4 +129,17 @@
             </div>
         <?php } ?>
     <?php } ?>
+
+    <!-- reading time -->
+    <?php if ($block->readingTimeEnabled() && $_post->getReadingTime()) { ?>
+        <div class="item post-posed-date inline-block">
+            <span class="blog-post-meta-date inline-flex text-gray-700 mr-2 gap-x-1">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 flex-shrink-0" width="25" height="25">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <?= $block->escapeHtml($_post->getReadingTime()) . ' ' . __('min read') ?>
+            </span>
+        </div>
+    <?php } ?>
+
 </div>
