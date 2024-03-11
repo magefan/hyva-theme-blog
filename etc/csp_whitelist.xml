@@ -9,15 +9,8 @@
     <policies>
         <policy id="script-src">
             <values>
-                <value id="addthis" type="host">*.addthis.com</value>
                 <value id="moatads" type="host">https://z.moatads.com</value>
-                <value id="addthisedge" type="host">https://v1.addthisedge.com</value>
                 <value id="jsdelivr" type="host">https://cdn.jsdelivr.net</value>
-            </values>
-        </policy>
-        <policy id="frame-src">
-            <values>
-                <value id="addthis" type="host">*.addthis.com</value>
             </values>
         </policy>
         <policy id="style-src">

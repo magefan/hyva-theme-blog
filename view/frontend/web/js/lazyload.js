@@ -62,10 +62,6 @@
                     }
 
 
-                    if (window.addthis) {
-                        addthis.toolbox('.addthis_toolbox');
-                    }
-
                     endLoading();
                 } else {
                     console.log('Error: ' + xmlHttp.status + ' ' + xmlHttp.statusText);
