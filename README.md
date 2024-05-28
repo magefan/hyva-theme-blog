@@ -1,5 +1,10 @@
 # Hyva Theme Magefan Blog Extension
 
+>
+> **Note:** This repository has been archived.<br/>
+> Hyva theme compatibility for the **Magefan Blog** extension is now available only in the **<a href="https://magefan.com/magento2-blog-extension/pricing" target="_blank">Blog Plus and Extra<a/>** editions.<br/>
+> Please navigate to your <a href="https://magefan.com/downloadable/customer/products?hyva=1" target="_blank">Magefan Account > My Downloads</a> to download the archive or to get the composer installation instructions.
+
 [![Total Downloads](https://poser.pugx.org/magefan/hyva-theme-blog/downloads)](https://packagist.org/packages/magefan/hyva-theme-blog)
 [![Latest Stable Version](https://poser.pugx.org/magefan/hyva-theme-blog/v/stable)](https://packagist.org/packages/magefan/hyva-theme-blog)
 
